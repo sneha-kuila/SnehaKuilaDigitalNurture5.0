@@ -1,0 +1,64 @@
+<app-header></app-header>
+<div class="home-container">
+
+  <h1>{{ portalName }}</h1>
+
+  <p>
+    Welcome to the Student Course Portal. This portal allows students to
+    browse available courses, enroll in courses, and manage their academic
+    profile.
+  </p>
+
+  <div class="stats-container">
+
+    <div class="card">
+      <h3>Courses Available</h3>
+      <p>{{ coursesAvailable }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Enrolled</h3>
+      <p>{{ enrolledCourses }}</p>
+    </div>
+
+    <div class="card">
+      <h3>GPA</h3>
+      <p>{{ gpa }}</p>
+    </div>
+
+  </div>
+
+  <br>
+
+  <!-- Property Binding -->
+  <button
+    [disabled]="!isPortalActive"
+    (click)="onEnrollClick()">
+
+    Enroll Now
+
+  </button>
+
+  <br><br>
+
+  <!-- Event Binding -->
+  <p *ngIf="message">
+    {{ message }}
+  </p>
+
+  <hr>
+
+  <h3>Search Courses</h3>
+
+  <!-- Two-Way Binding -->
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search course">
+
+  <p>
+    Searching for:
+    <strong>{{ searchTerm }}</strong>
+  </p>
+
+</div>

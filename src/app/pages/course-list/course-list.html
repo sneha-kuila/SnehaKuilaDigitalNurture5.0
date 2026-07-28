@@ -1,0 +1,22 @@
+<div *ngIf="isLoading">
+  Loading courses...
+</div>
+
+<div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<input
+  type="text"
+  [(ngModel)]="searchTerm"
+  (input)="onSearch()"
+  placeholder="Search courses"
+/>
+
+<div class="course-container">
+  <app-course-card
+    *ngFor="let course of (courses$ | async)"
+    [course]="course"
+    (click)="viewCourse(course)">
+  </app-course-card>
+</div>

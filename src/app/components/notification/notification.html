@@ -1,0 +1,23 @@
+<div class="notification-container">
+
+  <h2>Notifications</h2>
+
+  <button (click)="addNotification()">
+    Add Notification
+  </button>
+
+  <button (click)="clearNotifications()">
+    Clear Notifications
+  </button>
+
+  <ul *ngIf="notificationService.getNotifications().length > 0; else noNotifications">
+    <li *ngFor="let notification of notificationService.getNotifications()">
+      {{ notification }}
+    </li>
+  </ul>
+
+  <ng-template #noNotifications>
+    <p>No notifications available.</p>
+  </ng-template>
+
+</div>
