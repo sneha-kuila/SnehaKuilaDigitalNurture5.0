@@ -1,0 +1,3 @@
+com\cognizant\resilientgateway\ResilientGatewayApplication.class
+com\cognizant\resilientgateway\FallbackController.class
+com\cognizant\resilientgateway\ResilienceConfiguration.class

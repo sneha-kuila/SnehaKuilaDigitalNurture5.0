@@ -1,0 +1,12 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: jwt-auth-app
+
+app:
+  jwt:
+    # Demo-only secret. In a real project this comes from an env var / secrets manager.
+    secret: this-is-a-demo-secret-key-for-exercise-21-change-me-1234567890
+    expiration-ms: 3600000

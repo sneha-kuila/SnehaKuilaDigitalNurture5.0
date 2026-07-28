@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>OAuth2 / OIDC Demo - Exercise 19</title>
+</head>
+<body>
+<h1>Centralized Authentication with OAuth 2.1 / OIDC</h1>
+
+<div sec:authorize="isAnonymous()">
+    <p>You are not logged in.</p>
+    <a href="/oauth2/authorization/google">Login with Google</a>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <p>Welcome, <span sec:authentication="name">User</span>!</p>
+    <p><a href="/user">View raw user claims (JSON)</a></p>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

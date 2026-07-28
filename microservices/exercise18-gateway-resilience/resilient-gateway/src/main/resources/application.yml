@@ -1,0 +1,45 @@
+server:
+  port: 9093
+
+spring:
+  application:
+    name: resilient-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: flaky_service_route
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/slow-endpoint
+          filters:
+            - RewritePath=/api/slow-endpoint, /slow-endpoint
+            - name: CircuitBreaker
+              args:
+                name: flakyServiceCircuitBreaker
+                fallbackUri: forward:/fallback/slow-endpoint
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,circuitbreakers,circuitbreakerevents
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      flakyServiceCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+logging:
+  level:
+    com.cognizant.resilientgateway: INFO
